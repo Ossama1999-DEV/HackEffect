@@ -14,8 +14,12 @@ else
     echo "✅ Neofetch is already installed."
 fi
 
+# 5. Detect current Windows username
+WIN_USER=$(cmd.exe /C "echo %USERNAME%" 2>/dev/null | tr -d '\r')
+MUSIC_DIR="/mnt/c/Users/$WIN_USER/Music"
+
 # 3. Code to inject into both .bashrc and .zshrc
-injection='powershell.exe -windowstyle hidden -c "(New-Object Media.SoundPlayer '\''C:\\Users\\dbibi\\Music\\Ghost.wav'\'').PlaySync()" &
+injection='powershell.exe -windowstyle hidden -c "(New-Object Media.SoundPlayer '\''C:\\Users\\'$WIN_USER'\\Music\\Ghost.wav'\'').PlaySync()" &
 
 sleep 2
 
@@ -36,10 +40,6 @@ for file in ~/.bashrc ~/.zshrc; do
         echo "🔁 Script already exists in $file"
     fi
 done
-
-# 5. Detect current Windows username
-WIN_USER=$(cmd.exe /C "echo %USERNAME%" 2>/dev/null | tr -d '\r')
-MUSIC_DIR="/mnt/c/Users/$WIN_USER/Music"
 
 # 6. Create Music directory if it doesn't exist
 if [ ! -d "$MUSIC_DIR" ]; then
