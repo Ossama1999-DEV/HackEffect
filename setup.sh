@@ -51,7 +51,10 @@ fi
 
 # 7. Download Ghost.wav from your GitHub repo
 echo "🌐 Downloading Ghost.wav..."
-wget -O "$MUSIC_DIR/Ghost.wav" "https://github.com/Ossama1999-DEV/HackEffect/Ghost.wav"
+wget -O "$MUSIC_DIR/Ghost.wav" "https://github.com/Ossama1999-DEV/HackEffect/blob/main/Ghost.wav?raw=true" || {
+    echo "❌ Failed to download Ghost.wav. Please check your internet connection or the URL."
+    exit 1
+}
 
 # 8. Final instructions for the user
 clear
