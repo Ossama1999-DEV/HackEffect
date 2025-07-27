@@ -1,6 +1,10 @@
 # HackEffect
 A fun prank script for WSL users that plays a spooky sound and displays a message.
-video: https://github.com/Ossama1999-DEV/HackEffect/assets/HACKME.mp4
+## Demo
+
+<img alt="Welcome to VHS" src="https://github.com/Ossama1999-DEV/HackEffect/blob/main/HACKME.gif" width="600"/>
+
+
 ## Features
 - Plays a spooky sound when WSL is opened.
 - Displays a spooky message.
