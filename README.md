@@ -2,7 +2,7 @@
 A fun prank script for WSL users that plays a spooky sound and displays a message.
 ## Demo
 
-<img alt="Welcome to VHS" src="https://github.com/Ossama1999-DEV/HackEffect/blob/main/HACKME.gif" width="600"/>
+<img alt="Welcome to HackEffect" src="https://github.com/Ossama1999-DEV/HackEffect/blob/main/HACKME.gif" width="600"/>
 
 
 ## Features
