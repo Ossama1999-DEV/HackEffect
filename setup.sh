@@ -6,17 +6,31 @@ echo "🔧 Starting setup..."
 [ -f ~/.bashrc ] || touch ~/.bashrc
 [ -f ~/.zshrc ] || touch ~/.zshrc
 
-# 2. Install neofetch if not already installed
-if ! command -v neofetch &>/dev/null; then
-    echo "📦 Installing neofetch..."
-    sudo apt update && sudo apt install -y neofetch
+# 2. Install fastfetch (neofetch removed from Debian trixie)
+if ! command -v fastfetch &>/dev/null; then
+    echo "📦 Installing fastfetch..."
+    sudo apt update && sudo apt install -y fastfetch
 else
-    echo "✅ Neofetch is already installed."
+    echo "✅ fastfetch is already installed."
 fi
 
-# 5. Detect current Windows username
-WIN_USER=$(cmd.exe /C "echo %USERNAME%" 2>/dev/null | tr -d '\r')
+# 5. Detect current Windows username (robuste, avec fallback)
+WIN_USER=$(cmd.exe /C "echo %USERNAME%" 2>/dev/null | tr -d '\r\n')
+
+# Fallback : premier dossier utilisateur réel sous /mnt/c/Users
+if [ -z "$WIN_USER" ] || [ ! -d "/mnt/c/Users/$WIN_USER" ]; then
+    WIN_USER=$(ls /mnt/c/Users 2>/dev/null \
+        | grep -viE '^(Public|Default|Default User|All Users|desktop.ini)$' \
+        | head -n1)
+fi
+
+if [ -z "$WIN_USER" ]; then
+    echo "❌ Impossible de détecter l'utilisateur Windows."
+    exit 1
+fi
+
 MUSIC_DIR="/mnt/c/Users/$WIN_USER/Music"
+echo "👤 Utilisateur Windows : $WIN_USER"
 
 # 3. Code to inject into both .bashrc and .zshrc
 injection='powershell.exe -windowstyle hidden -c "(New-Object Media.SoundPlayer '\''C:\\Users\\'$WIN_USER'\\Music\\Ghost.wav'\'').PlaySync()" &
